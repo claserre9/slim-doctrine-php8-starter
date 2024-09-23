@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../config/env.php';
+
+use App\EntityManagerFactory;
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
+
+if(isset($_ENV['APP_ENV']) && $_ENV['APP_ENV'] == 'development') {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+}
+
+$entityManager = EntityManagerFactory::create();
+
+if(isset($entityManager)) {
+    ConsoleRunner::run(
+        new SingleManagerProvider($entityManager)
+    );
+}
