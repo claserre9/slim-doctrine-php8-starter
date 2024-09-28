@@ -1,5 +1,8 @@
 <?php
+
+use Symfony\Component\Dotenv\Dotenv;
+
 require_once "vendor/autoload.php";
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-$dotenv->safeLoad();
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__.'/../.env');
